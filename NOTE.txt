@@ -3,3 +3,5 @@ Package installed
 
 - yarn add node-sass@4.1.4 : pour installer sass
 - yarn add react-router-dom : pour installer le router
+
+Pour les router : le history, le match, le location sont accessible uniquement dans le composant initial passé dqns le Router sur la page APP
