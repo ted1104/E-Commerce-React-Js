@@ -5,3 +5,11 @@ Package installed
 - yarn add react-router-dom : pour installer le router
 
 Pour les router : le history, le match, le location sont accessible uniquement dans le composant initial passé dqns le Router sur la page APP
+About component :
+    # Each first options in url will be a page :
+        then it will have a global container as component
+        then global container will also have element that will be component
+    # Each container is component
+        ex : collection-preview
+    # Each element that is in container is component
+        ex : card that will be display in container
