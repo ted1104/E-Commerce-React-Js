@@ -13,3 +13,12 @@ About component :
         ex : collection-preview
     # Each element that is in container is component
         ex : card that will be display in container
+
+
+PAGE ELEMENT LIKE BUTTON, INPUT 
+    # this must be a component that can be personalized to aother usefull
+
+STATE :
+    # when a component will have own state we will not be share with other state we need to user a class
+    # when a component will not have own state that will be share with other we are going to use a function arrow
+    !! Even it is a page and each container componet will manage his state, this main will also be function not a class

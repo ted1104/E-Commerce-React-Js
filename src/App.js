@@ -3,6 +3,7 @@ import HomePage from './pages/homepage/HomePage.component'
 import {Route, Switch} from 'react-router-dom';
 import ShopPage from './pages/shop/shoppage.component'
 import Header from './components/header/header.component'
+import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component'
 // const HomePage = (props) =>{
 //   console.log(props);
 //   return(
@@ -51,6 +52,7 @@ function App() {
      <Switch>
         <Route exact path='/' component={HomePage} />
         <Route exact path='/shop' component = {ShopPage} />
+        <Route exact path ='/signin' component = {SignInAndSignUpPage}/>
         {/* <Route exact path='/blog/content/topics' component = {TopicList} />
         <Route exact path = '/blog/content/topics/:topicId' component = {TopicDetail} /> */}
      </Switch>
