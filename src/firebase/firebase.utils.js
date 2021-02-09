@@ -12,7 +12,9 @@ const config = {
   measurementId: "G-BJBV8E35R3",
 };
 
-firebase.initializeApp(config);
+if (!firebase.apps.length) {
+  firebase.initializeApp(config);
+}
 
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
@@ -23,3 +25,31 @@ provider.setCustomParameters({ prompt: "select_account" });
 export const signInWithGoogle = () => auth.signInWithPopup(provider);
 
 export default firebase;
+
+export const createUserProfileDocument = async (userAuth, additinalData) => {
+  if (!userAuth) return;
+  // console.log(userAuth);
+  // console.log("==============");
+  const userRef = firestore.doc(`users/${userAuth.uid}`);
+  const snapShot = await userRef.get();
+  // console.log(snapShot);
+  if (!snapShot.exists) {
+    // Test if another document with this ID already exist
+    const { displayName, email } = userAuth;
+    const createdAt = new Date();
+
+    try {
+      await userRef.set({
+        displayName,
+        email,
+        createdAt,
+        ...additinalData,
+      });
+    } catch (error) {
+      console.log("Error creating user ", error.message);
+    }
+  }
+
+  return userRef;
+  // console.log(snapShot.exists);
+};

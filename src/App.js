@@ -5,7 +5,7 @@ import { Route, Switch } from "react-router-dom";
 import ShopPage from "./pages/shop/shoppage.component";
 import Header from "./components/header/header.component";
 import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
-import { auth } from "./firebase/firebase.utils";
+import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 
 // const HomePage = (props) =>{
 //   console.log(props);
@@ -57,9 +57,10 @@ class App extends React.Component {
   unsucribeFromAuth = null;
 
   componentDidMount() {
-    this.unsucribeFromAuth = auth.onAuthStateChanged((user) => {
-      this.setState({ currentUser: user });
-      console.log(user);
+    this.unsucribeFromAuth = auth.onAuthStateChanged(async (user) => {
+      //this.setState({ currentUser: user });
+      createUserProfileDocument(user);
+      //console.log(user);
     });
   }
 
