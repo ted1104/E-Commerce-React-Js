@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import HomePage from "./pages/homepage/HomePage.component";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import ShopPage from "./pages/shop/shoppage.component";
 import Header from "./components/header/header.component";
 import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
@@ -63,12 +63,12 @@ class App extends React.Component {
     const { setCurrentUser } = this.props;
 
     this.unsucribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
-      console.log(userAuth);
+      // console.log(userAuth);
       //this.setState({ currentUser: user });
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
         userRef.onSnapshot((snapShot) => {
-          // console.log(snapShot);
+          // console.log(snapShot.data());
           // this.setState({
           //   currentUser: {
           //     id: snapShot.id,
@@ -91,13 +91,25 @@ class App extends React.Component {
   }
 
   render() {
+    // console.log(this.props.currentUser);
     return (
       <div className="App">
         <Header />
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/shop" component={ShopPage} />
-          <Route exact path="/signin" component={SignInAndSignUpPage} />
+          {/* <Route exact path="/signin" component={SignInAndSignUpPage} /> */}
+          <Route
+            exact
+            path="/signin"
+            render={() =>
+              this.props.currentUser ? (
+                <Redirect to="/" />
+              ) : (
+                <SignInAndSignUpPage />
+              )
+            }
+          />
           {/* <Route exact path='/blog/content/topics' component = {TopicList} />
         <Route exact path = '/blog/content/topics/:topicId' component = {TopicDetail} /> */}
         </Switch>
@@ -105,8 +117,13 @@ class App extends React.Component {
     );
   }
 }
+//mapStateToProps : pour lire le global state et l'utiliser dans l'application
+const mapStateToProps = (state) => ({
+  currentUser: state.user.currentUser,
+});
+//mapDispatchToProps : pour executer les actions du reducer
 const mapDispatchToProps = (dispatch) => ({
   setCurrentUser: (user) => dispatch(setCurrentUser(user)),
 });
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
