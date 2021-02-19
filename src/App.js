@@ -11,6 +11,7 @@ import { setCurrentUser } from "./redux/user/user.actions";
 import { selectCurrentUser } from "./redux/user/user.selectors";
 
 import "./App.css";
+import checkoutPage from "./pages/checkout/checkoutPage.component";
 // const HomePage = (props) =>{
 //   console.log(props);
 //   return(
@@ -100,6 +101,7 @@ class App extends React.Component {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/shop" component={ShopPage} />
+          <Route exact path="/checkout" component={checkoutPage} />
           {/* <Route exact path="/signin" component={SignInAndSignUpPage} /> */}
           <Route
             exact
