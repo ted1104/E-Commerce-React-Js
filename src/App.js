@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import HomePage from "./pages/homepage/HomePage.component";
+import HomePage from "./pages/homepage/homePage.component";
 import { Route, Switch, Redirect } from "react-router-dom";
 import ShopPage from "./pages/shop/shoppage.component";
 import Header from "./components/header/header.component";
