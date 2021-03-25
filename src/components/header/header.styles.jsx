@@ -36,3 +36,9 @@ export const OptionLink = styled(Link)`
 export const OptionDiv = styled.div`
   ${OptionContainerStyle}
 `;
+
+//INSTEAD OF TO USE CSS BLOCK WE CAN
+export const OptionLinks = styled(Link)`
+  padding: 10px 15px;
+  cursor: pointer;
+`;
