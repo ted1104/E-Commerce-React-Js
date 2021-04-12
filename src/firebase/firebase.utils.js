@@ -59,8 +59,20 @@ export const createUserProfileDocument = async (userAuth, additinalData) => {
   // console.log(snapShot.exists);
 };
 
-export const addCollectionsAndDocuments = (collectionKey, objectToAdd) => {
+export const addCollectionsAndDocuments = async (
+  collectionKey,
+  objectToAdd
+) => {
   const collectionsRef = firestore.collection(collectionKey);
-  console.log("==db utilies==");
-  console.log(collectionsRef);
+  const batch = firebase.batch();
+
+  objectToAdd.forEach((obj) => {
+    const newDocRef = collectionsRef.doc(); //generate random id
+    batch.set(newDocRef, obj);
+  });
+
+  // console.log("==db utilies==");
+  // console.log(collectionsRef);
+
+  return await batch.commit();
 };
