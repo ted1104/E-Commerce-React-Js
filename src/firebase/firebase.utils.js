@@ -64,7 +64,7 @@ export const addCollectionsAndDocuments = async (
   objectToAdd
 ) => {
   const collectionsRef = firestore.collection(collectionKey);
-  const batch = firebase.batch();
+  const batch = firestore.batch();
 
   objectToAdd.forEach((obj) => {
     const newDocRef = collectionsRef.doc(); //generate random id
