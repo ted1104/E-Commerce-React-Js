@@ -3,6 +3,8 @@ import { Route } from "react-router-dom";
 import CollectionsOverview from "../../components/collections-overview/collections-overview.component";
 import CollectionPage from "../collection/collection.component";
 
+import { firestore } from "../../firebase/firebase.utils";
+
 // const ShopPage = ({ match }) => {
 //   // console.log(match);
 //   return (
@@ -14,6 +16,15 @@ import CollectionPage from "../collection/collection.component";
 // };
 
 class ShopPage extends React.Component {
+  unsubscriberFromSnapshot = null;
+  componentDidMount() {
+    const collectionRef = firestore.collection("collections");
+    collectionRef.onSnapshot(async (snapshot) => {
+      console.log("===snapshot data sho====");
+      console.log(snapshot);
+    });
+  }
+
   render() {
     const { match } = this.props;
     return (
